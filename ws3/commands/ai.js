@@ -1,5 +1,5 @@
 const axios = require("axios");
-const name = "lux" ;
+const name = "ai" ;
 
 module.exports = {
   name,
