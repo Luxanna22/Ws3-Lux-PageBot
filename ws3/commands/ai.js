@@ -9,7 +9,7 @@ module.exports = {
     if (!prompt) return send(`Greetings! how can I help you?`);
     // send("Please wait... 🔎");
     try {
-    const gpt = await axios.get(`https://joshweb.click/api/gpt-4o`, {
+    const gpt = await axios.get(`${api.api_josh}/api/gpt-4o`, {
       params: {
         q: prompt,
         uid: event.sender.id
