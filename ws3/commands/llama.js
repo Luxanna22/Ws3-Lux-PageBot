@@ -3,7 +3,7 @@ const name = "llama";
 
 module.exports = {
   name,
-  description: "Interact with Lux",
+  description: "Interact with Llama",
   async run({ api, send, args }){
     try {
     const user = args.join(" ");
