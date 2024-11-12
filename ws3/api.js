@@ -61,8 +61,8 @@ module.exports = {
   temp,
   prefix,
   admin: [
-"8439419946124905",
-"9353065101379295"
+"100003028271549",
+"100089664861233"
 ],
   async sendMessage(senderId, message, pageAccessToken) {
     return await new Promise(async (resolve, reject) => {
@@ -104,11 +104,11 @@ module.exports = {
     resolve(res.data);
     });
   },
-  introduction: `Hello, I am WieAI and I am your assistant.
+  introduction: `Greetings, I'm Luxinnamon!.
 Type ${prefix}help for available commands.
 
-Note: WieAI is highly recommended to use Messenger because some features won't work and limited.
-🤖 Created by Neth Aceberos`,
+Note: Luxinnamon is highly recommended to use in Messenger because some features won't work and limited.
+✨ Created by Lux Reyes ✨`,
   api_josh: "https://deku-rest-apis.ooguy.com",
   echavie: "https://echavie3.nethprojects.workers.dev"
 }
