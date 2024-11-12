@@ -16,19 +16,18 @@ module.exports = {
         type: "template",
         payload: {
           template_type: "button",
-          text: `🤖 | These are the commands on Wie AI below.
-🔎 | Click every command to see the usage.`,
+          text: `Greetings! I'm Lux. \n\nThis page is still in development test, kindly contact the admin below: `,
           buttons: [
             {
               type: "web_url",
-              url: "https://www.facebook.com/kennethfranciscoaceberos",
-              title: "Contact Admin 1"
-            },
+              url: "https://www.facebook.com/Lux.SG.22",
+              title: "Contact Admin"
+            },/*
             {
               type: "web_url",
               url: "https://www.facebook.com/wieginesalpocialechavez",
               title: "Contact Admin 2"
-            }
+            }*/
          ]
         }
       }
