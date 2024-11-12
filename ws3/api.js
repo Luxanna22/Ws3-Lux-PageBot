@@ -61,8 +61,7 @@ module.exports = {
   temp,
   prefix,
   admin: [
-"100003028271549",
-"100089664861233"
+"8390094901102239"
 ],
   async sendMessage(senderId, message, pageAccessToken) {
     return await new Promise(async (resolve, reject) => {
@@ -105,10 +104,10 @@ module.exports = {
     });
   },
   introduction: `Greetings, I'm Luxinnamon!.
-Type ${prefix}help for available commands.
+Type ${prefix}𝗵𝗲𝗹𝗽 for available commands.
 
-Note: Luxinnamon is highly recommended to use in Messenger because some features won't work and limited.
-✨ Created by Lux Reyes ✨`,
+Note: 𝗟𝘂𝘅𝗶𝗻𝗻𝗮𝗺𝗼𝗻 is highly recommended to chat in Messenger.
+✨ Created by Lux Reyes!`,
   api_josh: "https://deku-rest-apis.ooguy.com",
   echavie: "https://echavie3.nethprojects.workers.dev"
 }
