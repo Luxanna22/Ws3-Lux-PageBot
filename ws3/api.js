@@ -108,6 +108,6 @@ Type ${prefix}𝗵𝗲𝗹𝗽 for available commands.
 
 Note: 𝗟𝘂𝘅𝗶𝗻𝗻𝗮𝗺𝗼𝗻 is highly recommended to chat in Messenger.
 ✨ Created by Lux Reyes!`,
-  api_josh: "https://deku-rest-apis.ooguy.com",
+  api_josh: "https://joshweb.click",
   echavie: "https://echavie3.nethprojects.workers.dev"
 }
