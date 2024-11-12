@@ -3,11 +3,11 @@ const name = "lux" ;
 
 module.exports = {
   name,
-  description: "Interact with ChatGPT-4o",
+  description: "Interact with Lux",
   async run ({ api, event, send, args }){
     const prompt = args.join(" ");
     if (!prompt) return send(`Greetings! how can I help you?`);
-    send("Please wait... 🔎");
+    // send("Please wait... 🔎");
     try {
     const gpt = await axios.get(`https://joshweb.click/api/gpt-4o`, {
       params: {
