@@ -48,7 +48,7 @@ const listenMessage = async (event, pageAccessToken) => {
     }
     default: {
       if (!message) return;
-      if (["hi", "wie", "wieai", "wiegine", "get started"]
+      if (["hi", "lux", "get started"]
         .some(text => text === message.toLowerCase().trim())) {
          return getStarted(send);
       }
@@ -103,7 +103,7 @@ const listenPostback = async (event, pageAccessToken) => {
       return getStarted(send);
     }
     case "prefix": {
-      return send(`Hello! My prefix is ${prefix}`);
+      return send(`Hello! My prefix is "${prefix}"`);
     }
     default: {
       const admin = api.admin.some(id => id === senderID);
