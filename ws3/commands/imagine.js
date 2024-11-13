@@ -52,12 +52,7 @@ Would you like to generate another image?`,
                 type: "postback",  // Postback type to trigger the same prompt again
                 title: "Generate Another Image",
                 payload: `REGENERATE_IMAGE:${userPrompt}`  // Pass the original user prompt as part of the payload
-              },/*
-              {
-                type: "web_url",  // Learn more link
-                url: "https://www.example.com/learn-more",  // Replace with a real link
-                title: "Learn More"
-              }*/
+              }
             ]
           }
         }
