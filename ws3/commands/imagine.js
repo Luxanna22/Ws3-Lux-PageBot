@@ -1,25 +1,33 @@
-const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
-const { promisify } = require('util');
-
-// Promisify fs.unlink for easier async/await usage
-const unlinkAsync = promisify(fs.unlink);
+const axios = require("axios");
+const name = "imagine";
 
 module.exports = {
-  description: "Generate an Image",
-  async run({ api, send, admin, userPrompt }) {
-    // Construct the URL for the image generation API, with the user prompt
-    const apiUrl = `https://joshweb.click/api/flux?prompt=${encodeURIComponent(userPrompt)}&model=4`;
+  name,
+  description: "Generate an Image.",
+  async run({ api, event, send, args }) {
+    const prompt = args.join(" ");
+    if (!prompt) {
+      return send(`Please provide a prompt to generate an image.`);
+    }
 
     try {
-      // Send request to the API to get the image (in buffer format)
-      const response = await axios.get(apiUrl, { responseType: 'arraybuffer' });
+      // Send the prompt to the image generation API (use your API endpoint here)
+      const response = await axios.get(`${api.api_josh}/api/flux`, {
+        params: {
+          prompt: prompt,
+          model: 4
+        },
+        responseType: 'arraybuffer' // Ensure we get the image as a buffer
+      });
+
+      if (!response || !response.data) {
+        throw new Error('Failed to generate image');
+      }
 
       // Convert the image buffer to Base64
       const base64Image = Buffer.from(response.data, 'binary').toString('base64');
 
-      // Send the generated image as Base64
+      // Send the image as Base64 in the message
       await send({
         attachment: {
           type: "image",
@@ -30,27 +38,29 @@ module.exports = {
         }
       });
 
-      // Send a follow-up message with buttons
-      setTimeout(async () => await send({
-        attachment: {
-          type: "template",
-          payload: {
-            template_type: "button",
-            text: `✨ Image generated successfully!
-Would you like to generate another image?`,
-            buttons: [
-              {
-                type: "postback",  // Postback type to trigger the same prompt again
-                title: "Generate Another Image",
-                payload: `REGENERATE_IMAGE:${userPrompt}`  // Pass the original user prompt as part of the payload
-              }
-            ]
+      // Send a follow-up message with a button to regenerate the image with the same prompt
+      setTimeout(async () => {
+        await send({
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "button",
+              text: `✨ Image generated successfully!
+Would you like to generate another image using the same prompt?`,
+              buttons: [
+                {
+                  type: "postback",  // Postback to trigger the same prompt again
+                  title: "Generate Another",
+                  payload: `REGENERATE_IMAGE:${prompt}`  // Pass the original user prompt as part of the payload
+                }
+              ]
+            }
           }
-        }
-      }), 2 * 1000);  // 2-second delay
+        });
+      }, 2000); // 2-second delay
 
-    } catch (error) {
-      console.error("Error generating image:", error);
+    } catch (err) {
+      console.error("Error generating image:", err);
       // Handle any errors (e.g., API error, invalid response)
       await send({
         text: "Sorry, there was an issue generating the image. Please try again later."
@@ -62,7 +72,7 @@ Would you like to generate another image?`,
   async handlePostback({ send, userId, payload }) {
     if (payload.startsWith("REGENERATE_IMAGE:")) {
       const userPrompt = payload.replace("REGENERATE_IMAGE:", "");  // Extract the original prompt
-      await this.run({ api: send, send, admin: [], userPrompt });  // Re-run the image generation with the same prompt
+      await this.run({ api: send, send, admin: [], args: [userPrompt] });  // Re-run the image generation with the same prompt
     }
   }
 };
