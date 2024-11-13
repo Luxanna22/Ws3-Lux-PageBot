@@ -16,25 +16,16 @@ module.exports = {
       // Send request to the API to get the image (in buffer format)
       const response = await axios.get(apiUrl, { responseType: 'arraybuffer' });
 
-      // Define the cache folder path
-      const cacheFolder = path.join(__dirname, 'cache');  // Using 'cache' folder as per your request
-      if (!fs.existsSync(cacheFolder)) {
-        fs.mkdirSync(cacheFolder);  // Create 'cache' folder if it doesn't exist
-      }
+      // Convert the image buffer to Base64
+      const base64Image = Buffer.from(response.data, 'binary').toString('base64');
 
-      // Define the path for the temporary image file
-      const imagePath = path.join(cacheFolder, 'generated_image.png');
-
-      // Save the buffer data to a file in the cache folder
-      await fs.promises.writeFile(imagePath, response.data);
-
-      // Send the generated image as an attachment
+      // Send the generated image as Base64
       await send({
         attachment: {
           type: "image",
           payload: {
             is_reusable: true,
-            url: `https://your-server-path/${imagePath}`  // Replace with actual image URL path or use Base64
+            url: `data:image/png;base64,${base64Image}`  // Sending the image as Base64
           }
         }
       });
