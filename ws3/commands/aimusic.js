@@ -8,7 +8,7 @@ module.exports = {
     const prompt = args.join(" ");
     if (!prompt)
     return send(`Usage: ${api.prefix + name} [your desired prompt]`);
-    send("This will take a few minutes, please wait...");
+    send("⌛ Creating your music, please wait...");
     try {
     const music = await axios.get(api.api_josh + "/api/aimusic", {
       params: {
@@ -26,7 +26,7 @@ module.exports = {
         }
       }
     });
-    send(`${prompt} created successfully!\nDownload link: ${url}`);
+    send(`✔️ Successfully created! \n🎵 Title: ${prompt} \n\nDownload link: ${url}`);
     } catch (error){
     send("Error while generating your request. Please try again or try another prompt.\n" + error.message || error);
     }
